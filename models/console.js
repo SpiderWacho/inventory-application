@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 const ConsoleSchema = new Schema({
     name: {type: String, required: true, maxLength: 50},
-    manufacturer: {type: String, required: true, maxLength: 50},
-    release_year: {type: Number, required: true, min: 1900, max: 2030},
+    manufacturer: {type: String, maxLength: 50},
+    release_year: {type: Number, min: 1900, max: 2030},
 })
 
 // Virtual for game's URL
