@@ -1,0 +1,7 @@
+extends layout
+
+block content
+    h1 List of all games
+    each game, i in game_list
+        p #{game.title} Current GameInstances: #{game_count[i]}
+    
