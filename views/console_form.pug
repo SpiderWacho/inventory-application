@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='name') Name:
+      input#name.form-control(type='text', placeholder='Name of console' name='name' required='true' value=(undefined===console ? '' : console.name) )
+    div.form-group
+      label(for='manufacturer') Manufacturer:
+      input#name.form-control(type='text', placeholder='Manufacturer' name='manufacturer' value=(undefined===console ? '' : console.manufacturer) )
+    div.form-group
+      label(for='release_year') Year of release:
+      input#release_year.form-control(type='number' name='release_year' min=1970 max=2030 value=(undefined===console ? '' : console.release_year))
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

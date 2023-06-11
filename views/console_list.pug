@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each console in console_list
+      li
+        a(href=console.url) #{console.name}
+
+    else
+      li There are no consoles created.
+
+
+    a(href='/catalog/console/create') Add a Console.

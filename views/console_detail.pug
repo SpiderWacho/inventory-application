@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1 Console: #{console.name}
+
+    h2 #[strong Games for this console:] 
+    if (game_list.length) 
+        each game in game_list 
+            a(href=game.url) #{game.title}
+    else 
+        p There is no games in this genre.
+    

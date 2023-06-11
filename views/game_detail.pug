@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1 Title: #{game.title}
+    p #[strong Studio:] 
+        a(href=game.studio.url) #{game.studio.name}
+    p #[strong Year of release:] #{game.release_year}
+    p #[strong Genres:]
+    each genre, index in game.genre
+        span.headline-item 
+        a(href=genre.url) #{genre.name}#{(index < game.genre.length - 1) ? ', ' : ''}
+    p #[strong Available for:]
+    each console, index in game.console
+        span.headline-item #{console.name}#{(index < game.console.length - 1) ? ', ' : ''}
+    

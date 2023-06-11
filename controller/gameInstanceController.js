@@ -3,12 +3,26 @@ const asyncHandler = require("express-async-handler");
 
 // Display list of all gameInstances.
 exports.gameInstance_list = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: gameInstance list");
+    const gameInstances = await GameInstance.find({}).populate("game").catch(err => next(err));
+    
+    res.render("game_instance_list", {
+      title: 'Game Instances List',
+      game_instances : gameInstances,
+    }
+    )
   });
 
   // Display detail page for a specific gameInstance.
 exports.gameInstance_detail = asyncHandler(async (req, res, next) => {
-  res.send(`NOT IMPLEMENTED: gameInstance detail: ${req.params.id}`);
+  const gameInstance = await GameInstance.findById(req.params.id).populate("game").catch(err => next(err));
+
+  const otherInstances = await GameInstance.find({game: gameInstance.game});
+
+  res.render('game_instance_detail', {
+              title: "Game Instances List",
+              game_instance: gameInstance,
+              otherInstances : otherInstances,
+  })
 });
 
 // Display gameInstance create form on GET.

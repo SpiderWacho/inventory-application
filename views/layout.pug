@@ -4,6 +4,12 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    div.navbar 
+    div.header 
       p Spider Game Store
+    div.navbar
+      a(href='/catalog/games' class='navbar-link') Games
+      a(href='/catalog/consoles' class='navbar-link') Consoles
+      a(href='/catalog/gameInstances' class='navbar-link') Game Instances
+      a(href='/catalog/genres' class='navbar-link') Genres
+      a(href='/catalog/studios' class='navbar-link') Studios
     block content

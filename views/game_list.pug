@@ -3,5 +3,7 @@ extends layout
 block content
     h1 List of all games
     each game, i in game_list
-        p #{game.title} Current GameInstances: #{game_count[i]}
+        a(href=game.url) #{game.title}
+        p Current GameInstances: #{game_count[i]}
     
+    a(href='/catalog/game/create') Add a game

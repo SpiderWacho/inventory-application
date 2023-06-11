@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    h1 ID: #{game_instance._id}
+    p #[strong Game:] 
+        a(href=game_instance.game.url) #{game_instance.game.title}
+    
+    p #[strong Status:]
+    if game_instance.status=='Available'
+        span.text-success #{game_instance.status}
+    else if game_instance.status=='Maintenance'
+        span.text-danger #{game_instance.status}
+    else
+        span.text-warning #{game_instance.status}
+
+    if game_instance.status!='Available'
+        p #[strong Due back:] #{game_instance.due_back}

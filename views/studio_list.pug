@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each studio in studio_list
+      li
+        a(href=studio.url) #{studio.name}
+        |  (#{studio.creation_year}) | Created by: (#{studio.founders }) | Nationality: (#{studio.nationality})
+
+    else
+      li There are no studios.
+
+
+    a(href='/catalog/studio/create') Add a studio.
