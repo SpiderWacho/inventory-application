@@ -15,3 +15,18 @@ block content
 
     if game_instance.status!='Available'
         p #[strong Due back:] #{game_instance.due_back}
+
+
+    // Stringify both instance and game_instance because they are objects
+    h2 Other instances of this game:
+    each instance in other_instances    
+        if JSON.stringify(instance._id) !== JSON.stringify(game_instance._id) 
+            p ID: 
+                a(href=instance.url) #{instance._id}
+
+    hr
+    p
+        a(href=game_instance.url+'/delete') Delete Game Instance
+    p
+        a(href=game_instance.url+'/update') Update Game Instance
+    

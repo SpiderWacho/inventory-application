@@ -12,4 +12,10 @@ block content
     p #[strong Available for:]
     each console, index in game.console
         span.headline-item #{console.name}#{(index < game.console.length - 1) ? ', ' : ''}
+
+    hr
+    p
+        a(href=game.url+'/delete') Delete Game
+    p
+        a(href=game.url+'/update') Update Game
     

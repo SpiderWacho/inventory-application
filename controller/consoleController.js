@@ -73,12 +73,36 @@ exports.console_create_post = [
 
 // Display console delete form on GET.
 exports.console_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: console delete GET");
+  const console = await Console.findById(req.params.id);
+  const gamesByConsole = await Game.find({console: req.params.id});
+
+  if (console === null) {
+    // Console don't exist.
+    res.redirect('/catalog/consoles')
+  }
+
+  res.render('console_delete', {
+              title: 'Delete console',
+              console: console,
+              game_list: gamesByConsole});
 });
 
 // Handle console delete on POST.
 exports.console_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: console delete POST");
+  const console = await Console.findById(req.params.id);
+  const gamesByConsole = await Game.find({console: req.params.id});
+
+  if (gamesByConsole.length > 0) {
+    // There are associated games, dont allow delete.
+    res.render('console_delete', {
+      title: 'Delete console',
+      console: console,
+      game_list: gamesByConsole});
+    return
+  } else {
+    await Console.findByIdAndRemove(req.body.consoleid);
+    res.redirect('/catalog/consoles');
+  }
 });
 
 // Display console update form on GET.

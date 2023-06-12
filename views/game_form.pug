@@ -7,6 +7,7 @@ block content
     div.form-group
       label(for='title') Title:
       input#title.form-control(type='text', placeholder='Name of game' name='title' required='true' value=(undefined===game ? '' : game.title) )
+    
     div.form-group
       label(for='studio') Studio:
       select#studio.form-control(type='select', placeholder='Select studio' name='studio' required='true' )
@@ -16,9 +17,11 @@ block content
             option(value=studio._id selected=(studio._id.toString()===game.studio._id.toString() ? 'selected' : false) ) #{studio.name}
           else
             option(value=studio._id) #{studio.name}
+    
     div.form-group
       label(for='release_year') Year of release:
       input#release_year.form-control(type='number' name='release_year' min=1970 max=2030 value=(undefined===game ? '' : game.release_year))
+    
     div.form-group
       label Genre:
       div
@@ -26,6 +29,7 @@ block content
           div
             input.checkbox-input(type='checkbox', name='genre', id=genre._id, value=genre._id, checked=genre.checked )
             label(for=genre._id) #{genre.name}
+    
     div.form-group
       label Consoles:
       div
@@ -33,6 +37,7 @@ block content
           div
             input.checkbox-input(type='checkbox', name='console', id=console._id, value=console._id, checked=console.checked )
             label(for=console._id) #{console.name}
+    
     button.btn.btn-primary(type='submit') Submit
 
   if errors

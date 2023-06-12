@@ -1,0 +1,18 @@
+extends layout 
+
+block content
+    h1  #{title}: #{game.title}
+    if game_instances.length 
+        p #[strong Delete the following game instances to delete this game.]
+        each instance in game_instances 
+            dl
+            dt
+                p ID: 
+                    a(href=instance.url) #{instance._id}
+    else 
+        p Do you really want to delete this Book?
+    
+        form(method='POST' action='')
+            div.form-group
+                input#gameid.form-control(type='hidden', name='gameid', required='true', value=game._id)
+            button.btn.btn-primary(type='submit') Delete

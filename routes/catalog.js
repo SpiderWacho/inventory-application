@@ -118,28 +118,28 @@ router.get("/consoles", console_controller.console_list);
 // GAME INSTANCES ROUTES //
 
 // GET request for creating a Game Instance.
-router.get("/gameinstance/create", game_instance_controller.gameInstance_create_get);
+router.get("/game_instance/create", game_instance_controller.gameInstance_create_get);
 
 // POST request for creating a gameinstance.
-router.post("/gameinstance/create", game_instance_controller.gameInstance_create_post);
+router.post("/game_instance/create", game_instance_controller.gameInstance_create_post);
 
 // GET request for delete a gameinstance.
-router.get("/gameinstance/:id/delete", game_instance_controller.gameInstance_delete_get);
+router.get("/game_instance/:id/delete", game_instance_controller.gameInstance_delete_get);
 
 // POST request for delete a gameinstance.
-router.post("/gameinstance/:id/delete", game_instance_controller.gameInstance_delete_post);
+router.post("/game_instance/:id/delete", game_instance_controller.gameInstance_delete_post);
 
 // GET request for updating a gameinstance.
-router.get("/gameinstance/:id/update", game_instance_controller.gameInstance_update_get);
+router.get("/game_instance/:id/update", game_instance_controller.gameInstance_update_get);
 
 // POST request for updating a gameinstance.
-router.post("/gameinstance/:id/update", game_instance_controller.gameInstance_update_post);
+router.post("/game_instance/:id/update", game_instance_controller.gameInstance_update_post);
 
 // GET request for one gameinstance
-router.get("/gameinstance/:id", game_instance_controller.gameInstance_detail);
+router.get("/game_instance/:id", game_instance_controller.gameInstance_detail);
 
 // GET request for a list of all gameinstances.
-router.get("/gameinstances", game_instance_controller.gameInstance_list);
+router.get("/game_instances", game_instance_controller.gameInstance_list);
 
 
 module.exports = router;

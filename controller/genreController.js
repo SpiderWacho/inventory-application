@@ -18,8 +18,6 @@ exports.genre_detail = asyncHandler(async (req, res, next) => {
     const genre = await Genre.findById(req.params.id).catch(err => {next(err)});
     const gamesByGenre = await Game.find({genre: req.params.id}).catch(err => {next(err)});
 
-    console.log(gamesByGenre[0])
-
     res.render('genre_detail', {
                 title: `Genre Detail ${genre.name}`,
                 genre: genre,
@@ -74,12 +72,38 @@ exports.genre_create_post = [
 
 // Display genre delete form on GET.
 exports.genre_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: genre delete GET");
+  const genre = await Genre.findById(req.params.id);
+  const gamesByGenre = await Game.find({genre: req.params.id});
+
+  if (genre === null) {
+    // Genre dont exist
+    res.redirect("/catalog/genres");
+  }
+  res.render("genre_delete", {
+              title: 'Delete genre',
+              genre: genre,
+              game_list: gamesByGenre, 
+  })
 });
 
 // Handle genre delete on POST.
 exports.genre_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: genre delete POST");
+  const genre = await Genre.findById(req.params.id);
+  const gamesByGenre = await Game.find({genre: req.params.id});
+  
+  if (gamesByGenre > 0) {
+    // Genre has associated games, first delete the games.
+    res.render("genre_delete", {
+      title: 'Delete genre',
+      genre: genre,
+      game_list: gamesByGenre, 
+    });
+    return;
+  } else {  
+      await Genre.findByIdAndRemove(req.body.genreid);
+      res.redirect('/catalog/genres');
+    }
+
 });
 
 // Display genre update form on GET.

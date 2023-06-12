@@ -171,12 +171,39 @@ exports.game_create_post = [
 
 // Display game delete form on GET.
 exports.game_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: game delete GET");
+  const game = await Game.findById(req.params.id).catch(err => next(err));
+  const game_instances = await GameInstance.find({game: req.params.id}).catch(err => next(err));
+
+  if (game === null) {
+    // No results.
+    res.redirect("catalog/games");
+  }
+
+  res.render('game_delete.pug', {
+              title: 'Delete a game',
+              game: game,
+              game_instances: game_instances,
+  })
 });
 
 // Handle game delete on POST.
 exports.game_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: game delete POST");
+  const game = await Game.findById(req.params.id).catch(err => next(err));
+  const game_instances = await GameInstance.find({game: req.params.id}).catch(err => next(err));
+
+  if (game_instances.length > 0) {
+    // There are game instances associated, so re render the form for delete
+    res.render("game_delete", {
+                title: 'Delete a Game',
+                game: game,
+                game_instances: game_instances,
+    });
+    return
+  } else {
+    // Game has no game instance associated, can be deleted.
+    await Game.findByIdAndRemove(req.body.gameid);
+    res.redirect("/catalog/games");
+  };
 });
 
 // Display game update form on GET.

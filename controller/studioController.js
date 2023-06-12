@@ -88,12 +88,37 @@ asyncHandler(async (req, res, next) => {
 
 // Display studio delete form on GET.
 exports.studio_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Studio delete GET");
+  const studio = await Studio.findById(req.params.id);
+  const gamesByStudio = await Game.find({studio: req.params.id});
+
+  if (studio === null) {
+    // The game don't exist
+    res.redirect("/catalog/studios")
+  }
+  res.render("studio_delete", {
+              title: 'Delete a studio',
+              studio: studio,
+              game_list: gamesByStudio,
+  });
 });
 
 // Handle studio delete on POST.
 exports.studio_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Studio delete POST");
+  const studio = await Studio.findById(req.params.id);
+  const gamesByStudio = await Game.find({studio: req.params.id});
+
+  if (gamesByStudio.length > 0) {
+    // There are games associated dont allow delete.
+    res.render("studio_delete", {
+      title: 'Delete a studio',
+      studio: studio,
+      game_list: gamesByStudio,
+    });
+    return;
+  } else {
+    await Studio.findByIdAndRemove(req.body.studioid)
+    res.redirect("/catalog/studios");
+  }
 });
 
 // Display studio update form on GET.
