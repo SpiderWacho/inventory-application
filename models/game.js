@@ -8,6 +8,7 @@ const GameSchema = new Schema({
     release_year: {type: Number, required: true, min: 1900, max: 2030},
     console: [{type: Schema.Types.ObjectId, ref: "Console", required: true}],
     genre: [{type: Schema.Types.ObjectId, ref: "Genre", required: true}],
+    img: {data: Buffer, contentType: String},
 })
 
 // Virtual for game's URL

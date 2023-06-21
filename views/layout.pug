@@ -2,14 +2,23 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/layout.css')
+    link(rel='stylesheet' href='/stylesheets/index.css')
+    link(rel='stylesheet' href='/stylesheets/game_list.css')
+
   body
     div.header 
-      p Spider Game Store
-    div.navbar
-      a(href='/catalog/games' class='navbar-link') Games
-      a(href='/catalog/consoles' class='navbar-link') Consoles
-      a(href='/catalog/game_instances' class='navbar-link') Game Instances
-      a(href='/catalog/genres' class='navbar-link') Genres
-      a(href='/catalog/studios' class='navbar-link') Studios
+      div.logo-container
+        a.logo-link(href='/')
+          img.logo(src='/img/spider-logo.png') 
+          p Spider Game Store
+      div.navbar
+        a(href='/catalog/games' class='navbar-link') Games
+        a(href='/catalog/consoles' class='navbar-link') Consoles
+        a(href='/catalog/game_instances' class='navbar-link') Instances
+        a(href='/catalog/genres' class='navbar-link') Genres
+        a(href='/catalog/studios' class='navbar-link') Studios
     block content
+
+    div.footer
+      p.footer-text Gaston Vecchio 2023

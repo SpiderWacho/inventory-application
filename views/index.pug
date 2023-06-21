@@ -1,18 +1,26 @@
 extends layout
 
 block content
-  h1 Last added games
-  div.carrousel-container
-    for game in games 
-      div.gameCard
-        div.gameCard-image 
-        div.gameCard-text
-          p #{game.title}
-
-  h2 stats
-  p Current Games: #{gameNumber}
-  p Current Game Instances: #{gameInstanceNumber}
-  p Current Genres created: #{genreNumber}
-  p Current Studios created: #{studioNumber}
-  p Current Consoles created: #{consoleNumber}
+  h1.title Last added games
+  div.content
+    div.carrousel-container
+      for game, index in games.reverse()
+        if index < 3 
+          div.gameCard      
+            a.link(href=game.url)  
+              div.gameCard-image-container 
+                if game.img.data !== undefined
+                  img.gameCard-image(src=`data:image/${game.img.contentType};base64,${game.img.data.toString('base64')}`)
+                else 
+                  p.text-image #{game.title}
+              div.gameCard-text
+                p #{game.title}
+  
+    span.title-container
+      h2.title Info:
+    p Current Games: #{gameNumber}
+    p Current Game Instances: #{gameInstanceNumber}
+    p Current Genres created: #{genreNumber}
+    p Current Studios created: #{studioNumber}
+    p Current Consoles created: #{consoleNumber}
     

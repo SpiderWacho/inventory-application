@@ -13,6 +13,10 @@ block content
     each console, index in game.console
         span.headline-item #{console.name}#{(index < game.console.length - 1) ? ', ' : ''}
 
+    if game.img.data !== undefined
+        img.gameCard-image(src=`data:image/${game.img.contentType};base64,${game.img.data.toString('base64')}`)
+    else 
+        p This game dont have a img
     hr
     p
         a(href=game.url+'/delete') Delete Game

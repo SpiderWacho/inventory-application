@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Rubik&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+    color: transparent;
+    text-decoration: none;
+}
+
+a:visited {
+    color: transparent;
+    text-decoration: none;
+}
+
+
+
+.header {
+  height: 15vh;
+  width: 100vw;
+  background-color: rgb(39, 39, 39);
+  display: flex;
+  font-size: 50px;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.logo-container {
+  font-family: 'Anton', sans-serif;
+  height: 100%;
+  width: 40%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding-left: 1%;
+
+  .logo {
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+  }
+
+  .logo-link {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+    color: white;
+  }
+}
+
+.navbar {
+  width: 60%;
+  height: 50%;
+  background-color: rgb(39, 39, 39);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 1%;
+  font-family: 'Rubik', sans-serif;
+}
+
+.navbar-link {
+  font-size: 1rem;
+  color: white !important;
+  border: 1px solid white;
+  height: 60%;
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navbar-link:hover {
+  background-color: rgb(73, 73, 73);
+}
+
+.footer {
+    height: 10vh;
+    background-color: rgb(19, 19, 19);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    
+    .footer-text {
+      padding-top: 1%;
+    }
+  }

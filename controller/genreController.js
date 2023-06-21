@@ -2,6 +2,7 @@ const Genre = require("../models/genre");
 const Game = require("../models/game")
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
+const genre = require("../models/genre");
 
 // Display list of all genres.
 exports.genre_list = asyncHandler(async (req, res, next) => {
@@ -107,12 +108,50 @@ exports.genre_delete_post = asyncHandler(async (req, res, next) => {
 });
 
 // Display genre update form on GET.
-exports.genre_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: genre update GET");
-});
+exports.genre_update_get = asyncHandler( async (req, res, next) => {
+  const genre = await Genre.findById(req.params.id);
+  
+  res.render('genre_form', {
+    title: 'Update a Genre',
+    genre: genre,
+  });
+})
 
 // Handle genre update on POST.
-exports.genre_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: genre update POST");
-});
+exports.genre_update_post = [
+  body("name", "Name must not be empty")
+  .trim()
+  .isLength({min: 3})
+  .escape(),
 
+  //Handle sanitized data
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    // Create a genre object with escaped and trimmed data.
+    const genre = new Genre({ name: req.body.name,
+                              _id: req.params.id });
+
+    if (!errors.isEmpty()) {
+      // There are errors. Render the form again with sanitized values/error mesages.
+      res.render("genre_form", {
+        title: "Update genre",
+        genre: genre,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      // Data from form is valid.
+      // Check if Genre with same name already exists.
+      const genreExists = await Genre.findOne({ name: req.body.name}).exec();
+      if (genreExists) {
+      // Genre exists, redirect to its detail page.
+        res.redirect(genreExists.url);
+      } else {
+          const thegenre = await Genre.findByIdAndUpdate(req.params.id, genre, {})
+          // New genre saved. Redirect to genre detail page.
+          res.redirect(thegenre.url);
+      }
+    }
+  })
+];

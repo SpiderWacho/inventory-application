@@ -102,11 +102,64 @@ exports.gameInstance_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display gameInstance update form on GET.
 exports.gameInstance_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: gameInstance update GET");
+    const [gameInstance, allGames] = await Promise.all([
+      GameInstance.findById(req.params.id),
+      Game.find({}),
+    ]).catch(err => next(err));
+
+    if (gameInstance === null) {
+      // No results
+      const err = new Error("Book Instance not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    res.render("game_instance_form", {
+                title: 'Updata Game',
+                game_instance: gameInstance,
+                games: allGames,
+    })
 });
 
 // Handle gameInstance update on POST.
-exports.gameInstance_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: gameInstance update POST");
-});
+exports.gameInstance_update_post = [
+  
+  
+body("game", "A game must be selected")
+.trim()
+.isLength({min: 3})
+.escape(),
+body("status", "A status must be selected")
+.trim()
+.isLength({ min: 3})
+.escape(),
+body("due_back")
+.optional(),
+
+asyncHandler(async (req, res, next) => {
+  errors = validationResult(req);
+
+  const game_instance = new GameInstance({
+    game: req.body.game,
+    status: req.body.status,
+    due_back: req.body.due_back,
+    _id: req.params.id,
+  })
+
+  if (!errors.isEmpty()) {
+    // There are errors, render again with game instance data
+    const games = await Game.find({}).catch(err => next(err));
+    res.render('game_instance_form',
+                {title: "Update Game Instance",
+                  games: games,
+                  game_instance: game_instance,
+                  errors: erros,
+                });
+              return;
+  } else {
+    // Succesful so update and redirect
+    const thegameinstance = await GameInstance.findByIdAndUpdate(req.params.id, game_instance, {});
+    res.redirect(thegameinstance.url);
+  }
+}),];
 

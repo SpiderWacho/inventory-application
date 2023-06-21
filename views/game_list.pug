@@ -1,9 +1,18 @@
 extends layout
 
 block content
-    h1 List of all games
-    each game, i in game_list
-        a(href=game.url) #{game.title}
-        p Current GameInstances: #{game_count[i]}
-    
-    a(href='/catalog/game/create') Add a game
+    div.content
+        h1.title List of all games
+        div.game-grid
+            each game, i in game_list    
+                div.game-card      
+                    a.link(href=game.url)  
+                        div.image-container 
+                            if game.img.data !== undefined
+                                img.image(src=`data:image/${game.img.contentType};base64,${game.img.data.toString('base64')}`)
+                            else 
+                                p.text-image #{game.title}
+                        div.text-container
+                            p #{game.title}      
+    a(href='/catalog/game/create') 
+        button Add a game

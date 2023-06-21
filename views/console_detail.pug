@@ -2,7 +2,8 @@ extends layout
 
 block content
     h1 Console: #{console.name}
-
+    p Manufacturer: #{console.manufacturer}
+    p Release year: #{console.release_year}
     h2 #[strong Games for this console:] 
     if (game_list.length) 
         each game in game_list 

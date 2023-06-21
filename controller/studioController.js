@@ -82,8 +82,6 @@ asyncHandler(async (req, res, next) => {
     res.redirect(studio.url)
   }
 })
-  
-
 ]
 
 // Display studio delete form on GET.
@@ -123,11 +121,61 @@ exports.studio_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display studio update form on GET.
 exports.studio_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: studio update GET");
+  const studio = await Studio.findById(req.params.id).catch(err => {next(err)});
+
+  res.render("studio_form", {title: "Update Studio",
+                            studio: studio});
 });
 
 // Handle studio update on POST.
-exports.studio_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: studio update POST");
-});
+exports.studio_update_post = [
+  // Validate and sanitize fields.
+  body("name")
+  .trim()
+  .isLength({min: 1})
+  .escape()
+  .withMessage("Name must be specified."),
+  body("founder.*","At least one founder specified").trim().isLength({min :1}).escape(),
+  body("creation_year")
+  .trim()
+  .isInt({min: 1950, max: 2030})
+  .escape(),
+  body("nationality", "Nationality must be specified")
+  .trim()
+  .isLength({min: 1})
+  .escape(),
+// Process request after validation and sanitization.
 
+asyncHandler(async (req, res, next) => {
+  // EXtract the validation errors from a request.
+  const errors = validationResult(req);
+
+  // FIXME:  Multiple founders error.
+
+  // Create Studio object with escaped and trimmed data.
+  const studio = new Studio({
+    name: req.body.name,
+    founder: req.body.founder,
+    creation_year: req.body.creation_year,
+    nationality: req.body.nationality,
+    _id: req.params.id,
+  });
+
+  if (!errors.isEmpty()) {
+    // There are errors. Render form again with sanitized values/errors messages.
+    res.render("studio_form", {
+      title: "Update Studio",
+      studio: studio,
+      errors: errors.array(),
+    });
+    return;
+  } else {
+    // Data form is valid.
+
+    // Find and update studio
+    const thestudio = await Studio.findByIdAndUpdate(req.params.id, studio, {});
+    // Redirect to new studio record.
+    res.redirect(thestudio.url)
+  }
+})
+];

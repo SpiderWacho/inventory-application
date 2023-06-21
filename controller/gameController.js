@@ -5,15 +5,23 @@ const Studio = require("../models/studio")
 const Console = require("../models/console")
 
 
+
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
+const multer  = require('multer')
+var path = require('path');
 
+const fs = require('fs');
+
+
+const multerStorage = multer.memoryStorage();
+const upload = multer({ storage: multerStorage, })
 
 exports.index = asyncHandler(async (req, res, next) => {
     let newError = '';
 
     const [games, gameNumber, gameInstanceNumber, genreNumber, studioNumber, consoleNumber] = await Promise.all([
-        Game.find({}).exec(),
+        Game.find({}).sort({date: -1}).exec(),
         Game.countDocuments({}).exec(),
         GameInstance.countDocuments({}).exec(),
         Genre.countDocuments({}).exec(),
@@ -90,7 +98,7 @@ exports.game_create_get = asyncHandler(async (req, res, next) => {
 // Handle game create on POST.
 exports.game_create_post = [
   // Convert the genre to an array.
-  (req, res, next) => {
+  (req, res, next) => { 
     if (!(req.body.genre instanceof Array)) {
       if (typeof req.body.genre === "undefined") req.body.genre = [];
       else req.body.genre = new Array(req.body.genre);
@@ -101,6 +109,8 @@ exports.game_create_post = [
     }
     next();
   },
+
+  upload.single('cover'),
 
   //Validate and sanitize fields.
   body("title", "Title must not be empty.")
@@ -122,6 +132,14 @@ exports.game_create_post = [
   asyncHandler(async (req, res, next) => {
     // Extract the validation errors from a request.
     const errors = validationResult(req);
+    
+    let finalImg = ''
+
+    if (req.file) {
+      finalImg = {
+        data: new Buffer.from(req.file.buffer, 'base64'), contentType: req.file.mimetype 
+      }
+    }
 
     // Create a game object with escaped and trimmed data.
     const game = new Game({
@@ -130,6 +148,7 @@ exports.game_create_post = [
       release_year: req.body.release_year,
       console: req.body.console,
       genre: req.body.genre,
+      img: finalImg,
     });
 
     if (!errors.isEmpty()) {
@@ -208,11 +227,143 @@ exports.game_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display game update form on GET.
 exports.game_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: game update GET");
+  
+  const [game, allStudios, allConsoles, allGenres] = await Promise.all([
+    await Game.findById(req.params.id),
+    await Studio.find({}).exec(),
+    await Console.find({}).exec(),
+    await Genre.find({}).exec(),
+  ]).catch(err => {next(err)});
+
+  if (game === null) {
+    // No results.
+    const err = new Error("Game nopt found");
+    err.statusd = 404;
+    return next(err);
+  }
+
+  // Mark our selected genres as checked
+  for (const genre of allGenres) {
+    for (const game_g of game.genre) {
+      if (genre._id.toString() === game_g._id.toString()) {
+        genre.checked = "true";
+      }
+    }
+  }
+
+    // Mark our selected consoles as checked
+    for (const console of allConsoles) {
+      for (const game_c of game.console) {
+        if (console._id.toString() === game_c._id.toString()) {
+          console.checked = "true";
+        }
+      }
+    }
+
+  res.render("game_form", {
+    title: "Update a Game",
+    studios: allStudios,
+    genres: allGenres,
+    consoles: allConsoles,
+    game: game,
+  });
 });
 
 // Handle game update on POST.
-exports.game_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: game update POST");
-});
+exports.game_update_post = [
+  
+  // Convert the genre to an array.
+  (req, res, next) => {
+    if (!(req.body.genre instanceof Array)) {
+      if (typeof req.body.genre === "undefined") {
+        req.body.genre = [];
+      } else {
+        req.body.genre = new Array(req.body.genre);
+      }
+    }
+    if (!(req.body.console instanceof Array)) {
+      if (typeof req.body.console === "undefined") {
+        req.body.console = [];
+      } else {
+        req.body.console = new Array(req.body.console);
+      }
+    }
+    next();
+  },
 
+  upload.single('cover'),
+
+  // Validate and sanitize fields.
+    body("title", "Title must not be empty.")
+    .trim()
+    .isLength({ min: 1})
+    .escape(),
+    body("studio", "Studio must not be empty")
+    .trim()
+    .isLength({ min: 1})
+    .escape(),
+    body("release_year", "Year of realease must not be empty")
+    .trim()
+    .isInt({min: 1950, max: 2030})
+    .escape(),
+    body("console.*").escape(),
+    body("genre.*").escape(),
+    // Process request after validation and sanitization.
+
+    
+    asyncHandler(async (req, res, next) => {
+      // Extract the validation errors from a request.
+    const errors = validationResult(req);
+    
+    const finalImg = {
+      data: new Buffer.from(req.file.buffer, 'base64'), contentType: req.file.mimetype 
+    }
+    
+    // Create a game object with escaped and trimmed data.
+    const game = new Game({
+      title: req.body.title,
+      studio: req.body.studio,
+      release_year: req.body.release_year,
+      console: req.body.console,
+      genre: req.body.genre,
+      img: finalImg,
+      _id: req.params.id, // This is required, or a new ID will be asigned!
+    });
+
+    if (!errors.isEmpty()) {
+      // There are errors. Render form again with sanitized values/error messages.
+
+      // Get all studios, genres and consoles for form.
+      const [allStudios, allConsoles, allGenres] = await Promise.all([
+        await Studio.find({}).exec(),
+        await Console.find({}).exec(),
+        await Genre.find({}).exec(),
+      ]);
+
+      // Mark out selected genres and consoles as checked
+      for (const genre of allGenres) {
+        if (game.genre.indexOf(genre._id) > -1) {
+          genre.checked = "true";
+        }
+      }
+      for (const console of allConsoles) {
+        if (game.console.indexOf(console._id) > -1) {
+          console.checked = "true";
+        }
+      }
+      console.log(game)
+      res.render("game_form", {
+        title: "Update Game",
+        studios: allStudios,
+        consoles: allConsoles,
+        game: game,
+        genres: allGenres,
+        errors: errors.array(),
+      });
+    } else {
+      // Data from form is valid. Save game.
+      const thegame = await Game.findByIdAndUpdate(req.params.id, game, {});
+      res.redirect(thegame.url);
+    }
+    })
+];

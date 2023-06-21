@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Rubik&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.header {
+  height: 15vh;
+  width: 100vw;
+  background-color: rgb(39, 39, 39);
+  display: flex;
+  font-size: 50px;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.logo-container {
+  font-family: 'Anton', sans-serif;
+  height: 100%;
+  width: 40%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding-left: 1%;
+
+  .logo {
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+  }
+
+  .logo-link {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+    color: white;
+  }
+}
+
+.navbar {
+  width: 60%;
+  height: 50%;
+  background-color: rgb(39, 39, 39);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 1%;
+  font-family: 'Rubik', sans-serif;
+}
+
+.navbar-link {
+  font-size: 1rem;
+  color: white;
+  border: 1px solid white;
+  height: 60%;
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navbar-link:hover {
+  background-color: rgb(73, 73, 73);
+}
+
+.carrousel-container {
+  height: 55vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.gameCard {
+  position: relative;
+  bottom: 0%;
+  height: 70%;
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  animation: appear .7s ease-in-out forwards;
+  transition: all .4s ease-in-out;
+  font-family: 'Rubik', sans-serif;
+
+  .link {
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color: none;
+
+
+    .gameCard-image-container {
+      background-color: rgb(51, 51, 51);
+      height: 80%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    
+      .gameCard-image {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    
+    .gameCard-text {
+        height: 20%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+        background-color: rgb(39, 39, 39);
+        color: white;
+
+        .text-image {
+          text-align: center;
+          font-size: 2rem;
+          color: white;
+        }
+      }
+    }
+ }
+
+ .gameCard:hover {
+  bottom: 50%;
+  width: 22%;
+  height: 77%;
+  box-shadow: 0px 0px 3px .5px black;
+ }
+
+@keyframes appear {
+  0% {
+    opacity: 0%;
+    top: 20%
+  }
+
+  100% {
+    opacity: 100%;
+    top: 0%;
+  }
+  
+}
+
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 20vh;
+}
+.title {
+  text-align: center;
+  font-family: 'Rubik', sans-serif;
+}
+
+.title-container {
+  width: 100%;
+}
+
+.footer {
+  height: 10vh;
+  background-color: rgb(19, 19, 19);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  
+  .footer-text {
+    padding-top: 1%;
+  }
+}

@@ -107,11 +107,53 @@ exports.console_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display console update form on GET.
 exports.console_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: console update GET");
+  const consol = await Console.findById(req.params.id);
+  
+  console.log(consol);
+  res.render("console_form", {
+    title: "Update Console",
+    console: consol,
+  })
 });
 
 // Handle console update on POST.
-exports.console_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: console update POST");
-});
+exports.console_update_post = [
+  body("name", "Name must not be empty")
+.trim()
+.isLength({min: 3})
+.escape(),
+body("manufacturer", "Manufacturer must not be empty")
+.optional ({ checkFalsy: true})
+.trim()
+.isLength({min: 3})
+.escape(),
+body("release_year")
+.optional ({ checkFalsy: true})
+.isInt({min: 1930, max: 2030}),
+
+asyncHandler(async (req, res, next) => {
+  const errors = validationResult(req);
+
+  // Create a console object with escaped and trimmed data.
+  const consol = new Console({
+    name: req.body.name,
+    manufacturer: req.body.manufacturer,
+    release_year: req.body.release_year,
+    _id: req.params.id,
+  })
+  if (!errors.isEmpty()) {
+    // There are errors.
+    // Render form again with saitized values and error messages.
+    res.render("console_form", {
+                title: "Update Console",
+                errors: errors.array(),
+                console: consol,
+    });
+    return
+  } else {
+    // Data form is valid. Update model and redirect
+    const theconsole = await Console.findByIdAndUpdate(req.params.id, consol, {});
+    res.redirect(theconsole.url);
+  }
+})];
 

@@ -2,8 +2,9 @@ extends layout
 
 block content
   h1= title
+  
 
-  form(method='POST' action='')
+  form(method='POST' action='' enctype="multipart/form-data")
     div.form-group
       label(for='title') Title:
       input#title.form-control(type='text', placeholder='Name of game' name='title' required='true' value=(undefined===game ? '' : game.title) )
@@ -14,7 +15,7 @@ block content
         - studios.sort(function(a, b) {let textA = a.name.toUpperCase(); let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
         for studio in studios
           if game
-            option(value=studio._id selected=(studio._id.toString()===game.studio._id.toString() ? 'selected' : false) ) #{studio.name}
+            option(value=studio._id selected=(studio._id.toString()===studio._id.toString() ? 'selected' : false) ) #{studio.name}
           else
             option(value=studio._id) #{studio.name}
     
@@ -37,6 +38,10 @@ block content
           div
             input.checkbox-input(type='checkbox', name='console', id=console._id, value=console._id, checked=console.checked )
             label(for=console._id) #{console.name}
+    
+    div.form-group
+      label Cover: 
+      input#cover.form-control(type='file' name='cover') 
     
     button.btn.btn-primary(type='submit') Submit
 
