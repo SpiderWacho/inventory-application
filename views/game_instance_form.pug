@@ -1,33 +1,33 @@
 extends layout 
 
 block content
-    h1= title 
+    div.form-content
+        h1.title= title
+        form(method='POST' action='')
+            div.form-group
+                label.input-label(for='game') Game:
+                select#game.form-control(type='select', placeholder='Select a game' name='game' required='true')
+                    - games.sort((a, b) => {let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 :0;}); 
+                    for game in games
+                        if game_instance 
+                            option(value=game._id selected=(game._id.toString() === game_instance.game._id.toString() ? 'selected' : false) ) #{game.title}
+                        else 
+                            option(value=game._id) #{game.title}
+            
+            div.form-group
+                label.input-label(for='status') Status:
+                select#status.form-control(type='select' placeholder='Select status' name='status' required='true')
+                    option(value='Maintenance') Maintenance
+                    option(value='Available') Available
+                    option(value='Loaned') Loaned
+                    option(value='Reserved') Reserved
+                    option(value='Scratched') Scratched
 
-    form(method='POST' action='')
-        div.form-group
-            label(for='game') Game:
-            select#game.form-control(type='select', placeholder='Select a game' name='game' required='true')
-                - games.sort((a, b) => {let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 :0;}); 
-                for game in games
-                    if game_instance 
-                        option(value=game._id selected=(game._id.toString() === game_instance.game._id.toString() ? 'selected' : false) ) #{game.title}
-                    else 
-                        option(value=game._id) #{game.title}
-        
-        div.form-group
-            label(for='status') Status:
-            select#status.form-control(type='select' placeholder='Select status' name='status' required='true')
-                option(value='Maintenance') Maintenance
-                option(value='Available') Available
-                option(value='Loaned') Loaned
-                option(value='Reserved') Reserved
-                option(value='Scratched') Scratched
+            div.form-group
+                label.input-label(for='due_back') Date when game is available:
+                input#due_back.form-control(type='date' name='due_back' value=(undefined===game_instance ? '' : game_instance.due_back))
 
-        div.form-group
-            label(for='due_back') Date when game is available:
-            input#due_back.form-control(type='date' name='due_back' value=(undefined===game_instance ? '' : game_instance.due_back))
-
-        button.btn.btn-primary(type='submit') Submit
+            button.btn.btn-primary(type='submit') Submit
 
     if errors
         ul

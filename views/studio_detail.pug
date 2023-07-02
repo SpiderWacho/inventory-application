@@ -1,26 +1,28 @@
 extends layout
 
 block content
+  div.detail-content
+    h1.title Studio: #{studio.name}
+    p Created in: #{studio.creation_year}
+    p Founders: #{studio.founders} 
+    p Nationality: #{studio.nationality}
+    div
 
-  h1 Studio: #{studio.name}
-  p Created in: #{studio.creation_year}
-  p Founders: #{studio.founders} 
-  p Nationality: #{studio.nationality}
-  div
+      h4 Games
 
-    h4 Games
-
-    dl
-      each game in studio_games
-        dt
-          a(href=game.url) #{game.title}
-        
-
+      if studio_games.length
+        div.list-container
+          ul
+            each game in studio_games
+              li
+                a(href=game.url) #{game.title}
+          
       else
         p This studio has no games.
 
-  hr
-  p
-      a(href=studio.url+'/delete') Delete Studio
-  p
-      a(href=studio.url+'/update') Update Studio
+    hr
+    div.btn-container
+      btn.btn-primary
+          a(href=studio.url+'/delete') Delete Studio
+      btn.btn-primary
+          a(href=studio.url+'/update') Update Studio

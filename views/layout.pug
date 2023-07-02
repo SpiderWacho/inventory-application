@@ -5,6 +5,9 @@ html
     link(rel='stylesheet', href='/stylesheets/layout.css')
     link(rel='stylesheet' href='/stylesheets/index.css')
     link(rel='stylesheet' href='/stylesheets/game_list.css')
+    link(rel='stylesheet' href='/stylesheets/form.css')
+    link(rel='stylesheet' href='/stylesheets/list.css')
+    link(rel='stylesheet' href='/stylesheets/detail.css')
 
   body
     div.header 
@@ -13,11 +16,26 @@ html
           img.logo(src='/img/spider-logo.png') 
           p Spider Game Store
       div.navbar
-        a(href='/catalog/games' class='navbar-link') Games
-        a(href='/catalog/consoles' class='navbar-link') Consoles
-        a(href='/catalog/game_instances' class='navbar-link') Instances
-        a(href='/catalog/genres' class='navbar-link') Genres
-        a(href='/catalog/studios' class='navbar-link') Studios
+        div.element-container
+          a(href='/catalog/games' class='navbar-link') Games
+          div.subelement-container
+            a.hover-link(href='/catalog/game/create') Register a new Game
+        div.element-container
+          a(href='/catalog/consoles' class='navbar-link') Consoles
+          div.subelement-container
+            a.hover-link(href='/catalog/console/create') Register a new Console
+        div.element-container
+          a(href='/catalog/game_instances' class='navbar-link') Instances
+          div.subelement-container
+            a.hover-link(href='/catalog/game_instance/create') Register a new Instance
+        div.element-container
+          a(href='/catalog/genres' class='navbar-link') Genres
+          div.subelement-container
+            a.hover-link(href='/catalog/genre/create') Register a new Genre
+        div.element-container
+          a(href='/catalog/studios' class='navbar-link') Studios
+          div.subelement-container  
+            a.hover-link(href='/catalog/studio/create') Register a new Studio
     block content
 
     div.footer

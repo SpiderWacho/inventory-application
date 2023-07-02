@@ -17,10 +17,16 @@ block content
                 p #{game.title}
   
     span.title-container
-      h2.title Info:
-    p Current Games: #{gameNumber}
-    p Current Game Instances: #{gameInstanceNumber}
-    p Current Genres created: #{genreNumber}
-    p Current Studios created: #{studioNumber}
-    p Current Consoles created: #{consoleNumber}
+      h2.title Current Data in Store
+    ul
+      li Current Games: 
+        a(href='/catalog/games/') #{gameNumber} 
+      li Current Game Instances: 
+        a(href='/catalog/gameinstances/') #{gameInstanceNumber}
+      li Current Genres created: 
+        a(href='/catalog/genres/') #{genreNumber}
+      li Current Studios created: 
+        a(href='/catalog/studios/') #{studioNumber}
+      li Current Consoles created: 
+        a(href='/catalog/consoles/') #{consoleNumber}
     

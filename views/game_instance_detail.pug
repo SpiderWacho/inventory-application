@@ -1,32 +1,37 @@
 extends layout
 
 block content
-    h1 ID: #{game_instance._id}
-    p #[strong Game:] 
-        a(href=game_instance.game.url) #{game_instance.game.title}
-    
-    p #[strong Status:]
-    if game_instance.status=='Available'
-        span.text-success #{game_instance.status}
-    else if game_instance.status=='Maintenance'
-        span.text-danger #{game_instance.status}
-    else
-        span.text-warning #{game_instance.status}
+    div.detail-content
+        h1.title ID: #{game_instance._id}
+        p.info #[strong Game:] 
+            a.link(href=game_instance.game.url) #{game_instance.game.title}
+        
+        p.info #[strong Status:]
+        if game_instance.status=='Available'
+            span.info.text-success #{game_instance.status}
+        else if game_instance.status=='Maintenance'
+            span.info.text-danger #{game_instance.status}
+        else
+            spaninfo.info.text-warning #{game_instance.status}
 
-    if game_instance.status!='Available'
-        p #[strong Due back:] #{game_instance.due_back}
+        if game_instance.status!='Available'
+            p.info #[strong Due back:] #{game_instance.due_back_formatted}
 
 
-    // Stringify both instance and game_instance because they are objects
-    h2 Other instances of this game:
-    each instance in other_instances    
-        if JSON.stringify(instance._id) !== JSON.stringify(game_instance._id) 
-            p ID: 
-                a(href=instance.url) #{instance._id}
+        // Stringify both instance and game_instance because they are objects
+        h2.title Other instances of this game:
+        if other_instances.lenght
+            each instance in other_instances    
+                if JSON.stringify(instance._id) !== JSON.stringify(game_instance._id) 
+                    p.info ID: 
+                        a(href=instance.url) #{instance._id}
+        else 
+            p.info.link This game has not instances created
 
-    hr
-    p
-        a(href=game_instance.url+'/delete') Delete Game Instance
-    p
-        a(href=game_instance.url+'/update') Update Game Instance
+        hr
+        div.btn-container
+            btn.btn-primary
+                a(href=game_instance.url+'/delete') Delete Game Instance
+            btn.btn-primary
+                a(href=game_instance.url+'/update') Update Game Instance
     

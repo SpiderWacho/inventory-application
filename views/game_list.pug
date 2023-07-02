@@ -1,9 +1,15 @@
 extends layout
 
 block content
-    div.content
+    div.game-list-content
         h1.title List of all games
         div.game-grid
+            div#new-game.game-card
+                a.link(href='/catalog/game/create')
+                    div.image-container
+                        p.text-image Add a New Game 
+                    div.text-container
+                        p New Game
             each game, i in game_list    
                 div.game-card      
                     a.link(href=game.url)  
@@ -14,5 +20,3 @@ block content
                                 p.text-image #{game.title}
                         div.text-container
                             p #{game.title}      
-    a(href='/catalog/game/create') 
-        button Add a game

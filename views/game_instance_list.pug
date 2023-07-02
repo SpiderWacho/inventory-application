@@ -1,11 +1,14 @@
 extends layout
 
 block content
-    h1 List of all Game Instances
+  div.list-content
+    h1.title= title
 
-    p There is currently #{game_instances.length} game instances created
-    each instance in game_instances
-        li
-            a(href=instance.url) #{instance.game.title} | ID: #{instance._id}
+    div.list-container 
+        ul
+            each instance in game_instances
+                li
+                    a(href=instance.url) #{instance.game.title} | ID: #{instance._id}
     
-    a(href='/catalog/game_instance/create') Add a Game Instance
+    btn.btn-primary
+        a(href='/catalog/game_instance/create') Add a Game Instance

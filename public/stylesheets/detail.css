@@ -1,0 +1,70 @@
+
+
+.detail-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 75vh;
+
+    .title {
+        width: 100%;
+        font-family: 'Bebas Neue', sans-serif;
+    }
+
+    li {
+        width: 40%;
+    }
+
+}
+
+
+
+
+.btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 1.5rem;
+}
+
+.link {
+    display: inline-block;
+    position: relative;
+}
+
+.link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.text-success {
+    color: rgb(14, 117, 14);
+}
+
+.text-warning {
+    color: #c99931;
+}
+
+.text-danger {
+    color: rgb(155, 30, 30);
+}
