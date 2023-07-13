@@ -1,18 +1,19 @@
 extends layout 
 
 block content
-    h1  #{title}: #{genre.name}
-    if game_list.length 
-        p #[strong Delete the following associated games to delete this genre.]
-        each game in game_list 
-            dl
-            dt
-                p Game: 
-                    a(href=game.url) #{game.title}
-    else 
-        p Do you really want to delete this Genre?
-    
-        form(method='POST' action='')
-            div.form-group
-                input#genreid.form-control(type='hidden', name='genreid', required='true', value=genre._id)
-            button.btn.btn-primary(type='submit') Delete
+    div.delete-content
+        h1.title  #{title}: #{genre.name}
+        if game_list.length 
+            p #[strong Delete the following associated games to delete this genre.]
+            each game in game_list 
+                dl
+                dt
+                    p Game: 
+                        a(href=game.url) #{game.title}
+        else 
+            p.info Do you really want to delete this Genre?
+        
+            form(method='POST' action='')
+                div.form-group
+                    input#genreid.form-control(type='hidden', name='genreid', required='true', value=genre._id)
+                button.btn.btn-primary(type='submit') Delete

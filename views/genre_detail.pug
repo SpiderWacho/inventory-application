@@ -3,7 +3,7 @@ extends layout
 block content
     div.detail-content
         h1.title Genre: #{genre.name}
-        h2.title #[strong Games in this genre:] 
+        h2.subtitle #[strong Games in this genre] 
         div.list-container
             ul
                 if (gamesByGenre.length) 
@@ -16,7 +16,7 @@ block content
 
         hr
         div.btn-container
-            btn.btn-primary
-                a(href=genre.url+'/delete') Delete Genre
-            btn.btn-primary
-                a(href=genre.url+'/update') Update Genre
+            a.btn-link(href=genre.url+'/delete') 
+                btn.btn-primary Delete Genre
+            a.btn-link(href=genre.url+'/update') 
+                btn.btn-primary Update Genre

@@ -10,7 +10,7 @@ exports.studio_list = asyncHandler(async (req, res, next) => {
     .catch((err) => {return next(err)})
       // Succesful, so render
       res.render('studio_list', {
-        title: 'Studio List',
+        title: 'ALL STUDIOS',
         studio_list: list_studios,
       });
 });

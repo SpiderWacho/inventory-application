@@ -199,7 +199,7 @@ exports.game_delete_get = asyncHandler(async (req, res, next) => {
   }
 
   res.render('game_delete.pug', {
-              title: 'Delete a game',
+              title: 'Delete Game',
               game: game,
               game_instances: game_instances,
   })
@@ -271,8 +271,7 @@ exports.game_update_get = asyncHandler(async (req, res, next) => {
 
 // Handle game update on POST.
 exports.game_update_post = [
-  
-  // Convert the genre to an array.
+    // Convert the genre to an array.
   (req, res, next) => {
     if (!(req.body.genre instanceof Array)) {
       if (typeof req.body.genre === "undefined") {
@@ -314,9 +313,14 @@ exports.game_update_post = [
     asyncHandler(async (req, res, next) => {
       // Extract the validation errors from a request.
     const errors = validationResult(req);
-    
-    const finalImg = {
-      data: new Buffer.from(req.file.buffer, 'base64'), contentType: req.file.mimetype 
+
+    const loadedGame = await Game.findById(req.params.id);
+    let finalImg = loadedGame.img;
+      console.log(req.file)
+    if (req.file !== undefined) {
+       finalImg = {
+        data: new Buffer.from(req.file.buffer, 'base64'), contentType: req.file.mimetype 
+      }
     }
     
     // Create a game object with escaped and trimmed data.

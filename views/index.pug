@@ -1,8 +1,8 @@
 extends layout
 
 block content
-  h1.title Last added games
   div.content
+    h1.title Last added games
     div.carrousel-container
       for game, index in games.reverse()
         if index < 3 
@@ -19,14 +19,14 @@ block content
     span.title-container
       h2.title Current Data in Store
     ul
-      li Current Games: 
-        a(href='/catalog/games/') #{gameNumber} 
+      li Current Games created: 
+        a.link(href='/catalog/games/') #{gameNumber} 
       li Current Game Instances: 
-        a(href='/catalog/gameinstances/') #{gameInstanceNumber}
+        a.link(href='/catalog/gameinstances/') #{gameInstanceNumber}
       li Current Genres created: 
-        a(href='/catalog/genres/') #{genreNumber}
+        a.link(href='/catalog/genres/') #{genreNumber}
       li Current Studios created: 
-        a(href='/catalog/studios/') #{studioNumber}
+        a.link(href='/catalog/studios/') #{studioNumber}
       li Current Consoles created: 
-        a(href='/catalog/consoles/') #{consoleNumber}
+        a.link(href='/catalog/consoles/') #{consoleNumber}
     

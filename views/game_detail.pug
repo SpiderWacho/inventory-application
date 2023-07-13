@@ -1,25 +1,40 @@
 extends layout
 
 block content
-    h1 Title: #{game.title}
-    p #[strong Studio:] 
-        a(href=game.studio.url) #{game.studio.name}
-    p #[strong Year of release:] #{game.release_year}
-    p #[strong Genres:]
-    each genre, index in game.genre
-        span.headline-item 
-        a(href=genre.url) #{genre.name}#{(index < game.genre.length - 1) ? ', ' : ''}
-    p #[strong Available for:]
-    each console, index in game.console
-        span.headline-item #{console.name}#{(index < game.console.length - 1) ? ', ' : ''}
-
-    if game.img.data !== undefined
-        img.gameCard-image(src=`data:image/${game.img.contentType};base64,${game.img.data.toString('base64')}`)
-    else 
-        p This game dont have a img
-    hr
-    p
-        a(href=game.url+'/delete') Delete Game
-    p
-        a(href=game.url+'/update') Update Game
+    div.game-detail-content
+        h1.title Title: #{game.title}
+        div.info-container
+            p #[strong Studio:] 
+                a(href=game.studio.url) #{game.studio.name}
+            p #[strong Year of release:] #{game.release_year}
+            p #[strong Genres:]
+            if game.genre.length
+                div.list-container
+                    ul
+                        each genre, index in game.genre
+                            li
+                                a(href=genre.url) #{genre.name}#{(index < game.genre.length - 1) ? ', ' : ''}
+            else 
+                p This game don't have associated genres.
+            p #[strong Available for:]
+            if game.console.length
+                div.list-container
+                    ul
+                        each console, index in game.console
+                            li
+                                a #{console.name}#{(index < game.console.length - 1) ? ', ' : ''}
+            else 
+                p This game don't have associated platforms
+        div.image-container
+            if game.img.data !== undefined
+                img.gameCard-image(src=`data:image/${game.img.contentType};base64,${game.img.data.toString('base64')}`)
+            else
+                div.gameCard-image 
+                    p.subtext This game don't have a saved img
+        hr
+        div.btn-container
+            a.btn-link(href=game.url+'/delete') 
+                btn.btn-primary Delete Game
+            a.btn-link(href=game.url+'/update') 
+                btn.btn-primary Update Game
     

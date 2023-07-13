@@ -1,6 +1,3 @@
-
-    
-
 .game-list-content {
     width: 100%;
     display: flex;
@@ -8,87 +5,203 @@
     align-items: center;
     flex-wrap: wrap;
     flex-direction: row;
+    height: 85vh;
+    overflow: scroll;
 
     .title {
         width: 100%;
+        text-align: center;
+        font-family: 'Bebas Neue', sans-serif;
     }
-
-    .game-grid {
-        display: grid;
-        width: 100%;
-        height: 100%;
-        grid-template-columns: repeat(3, 1fr);
-        grid-auto-rows: 1fr;
-        justify-items: center;
-        align-items: center;
-        gap: 50px;
-        margin-bottom: 50px;
-
-        #new-game {
-            opacity: .8 !important;
-        }
-
-        .game-card {
-            min-height: 250px;
-            height: 90%;
-            width: 50%;
-            border: 1px solid black;
-            animation: appear .7s ease-in-out forwards;
-            transition: all .4s ease-in-out;
-            font-family: 'Rubik', sans-serif;
     
-            .link {
-                height: 100%;
-                width: 100%;
-                text-decoration: none;
+    .games-container {
+        width: 1280px;
+        height: 100%;
 
-                .image-container {
-                    height: 75%;
+        .game-grid {
+            display: grid;
+            width: 100%;
+            height: 100%;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 1fr;
+            justify-items: center;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 50px;
+
+            #new-game {
+                opacity: .8 !important;
+            }
+
+            .game-card {
+                min-height: 250px;
+                height: 70%;
+                width: 75%;
+                border: 1px solid black;
+                animation: appear .7s ease-in-out forwards;
+                transition: all .4s ease-in-out;
+                font-family: 'Rubik', sans-serif;
+        
+                .link {
+                    height: 100%;
                     width: 100%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: rgb(51, 51, 51);
-                    color: white;
-                    
-                    
+                    text-decoration: none;
 
-                    .image {
+                    .image-container {
+                        height: 75%;
                         width: 100%;
-                        height: 100%;
-                        object-fit: cover;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: rgb(51, 51, 51);
+                        color: white;
+                        
+                        
+
+                        .image {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+
                     }
 
-                }
-
-                .text-container {
-                    height: 25%;
-                    width: 100%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border: 1px solid black;
-                    background-color: rgb(39, 39, 39);
-                    color: white;
-            
+                    .text-container {
+                        height: 25%;
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border: 1px solid black;
+                        background-color: rgb(39, 39, 39);
+                        color: white;
+                
+                    }
                 }
             }
-        }
 
-        .game-card:hover {
-            transform: scale(1.1);
+            .game-card:hover {
+                transform: scale(1.1);
+            }
         }
     }
 }
 
 @keyframes appear {
     0% {
-      opacity: 0%;
-      top: 20%
+    opacity: 0%;
+    top: 20%
     }
-  
+
     100% {
-      opacity: 100%;
-      top: 0%;
+    opacity: 100%;
+    top: 0%;
     }
+}
+
+
+@media only screen and (min-width: 1280px){
+    
+
+    .game-list-content {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-direction: row;
+        height: 75vh;
+        overflow: scroll;
+
+        .title {
+            width: 100%;
+            text-align: center;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        
+        .games-container {
+            width: 1280px;
+            height: 100%;
+
+            .game-grid {
+                display: grid;
+                width: 100%;
+                height: 100%;
+                grid-template-columns: repeat(3, 1fr);
+                grid-auto-rows: 1fr;
+                justify-items: center;
+                align-items: center;
+                gap: 50px;
+                margin-bottom: 50px;
+
+                #new-game {
+                    opacity: .8 !important;
+                }
+
+                .game-card {
+                    min-height: 250px;
+                    height: 90%;
+                    width: 50%;
+                    border: 1px solid black;
+                    animation: appear .7s ease-in-out forwards;
+                    transition: all .4s ease-in-out;
+                    font-family: 'Rubik', sans-serif;
+            
+                    .link {
+                        height: 100%;
+                        width: 100%;
+                        text-decoration: none;
+
+                        .image-container {
+                            height: 75%;
+                            width: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: rgb(51, 51, 51);
+                            color: white;
+                            
+                            
+
+                            .image {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+
+                        }
+
+                        .text-container {
+                            height: 25%;
+                            width: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border: 1px solid black;
+                            background-color: rgb(39, 39, 39);
+                            color: white;
+                    
+                        }
+                    }
+                }
+
+                .game-card:hover {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+
+    @keyframes appear {
+        0% {
+        opacity: 0%;
+        top: 20%
+        }
+    
+        100% {
+        opacity: 100%;
+        top: 0%;
+        }
+    }
+
 }

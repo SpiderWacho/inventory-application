@@ -1,26 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Yanone+Kaffeesatz:wght@300&display=swap');
 
+
 .form-content {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    height: 75vh;
+    height: 85vh;
 
 
     .title {
+        display: block;
         font-family: 'Bebas Neue', sans-serif;
         width: 100%;
+        text-align: center;
+        font-size: 5rem;text-decoration: underline;
     }
 }
 
-form {
+.form-content > form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 45%;
+    width: 100%;
+    height: 80%;
 }
 
 .form-group {
@@ -36,32 +41,41 @@ form {
     width: 100%;
     text-align: center;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
+    font-size: 4rem;
 }
 
 .form-control:not(#studio) {
     border: none;
     border-bottom: 1px solid black;
     transition: all ease-in-out .4s;
-    width: 50%;
+    width: 80%;
     margin-top: 2%;
     font-family: 'Yanone Kaffeesatz', sans-serif;
-    font-size: 1.3rem;
+    font-size: 3rem;
     text-align: center;
 }
 
 #studio {
     border: none;
     font-family: 'Yanone Kaffeesatz', sans-serif;
-    width: 50%;
+    width: 80%;
     margin-top: 2%;
-    font-size: 1.3rem;
+    font-size: 3rem;
     text-align: center;
 }
 
+option {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.checkbox-input {
+    height: 25px;
+    width: 25px;
+}
 .checkbox-label {
     font-family: 'Yanone Kaffeesatz', sans-serif;
-    font-size: 1.3rem;
+    font-size: 3rem;
 }
 
 .form-control:focus {
@@ -75,14 +89,112 @@ form {
 }
 
 #cover-label {
+    margin-top: 2%;
     border: 1px solid #ccc;
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
     opacity: .7;
+    font-size: 2rem;
 }
 
 #cover-label:hover {
     opacity: 1;
 }
 
+@media only screen and (min-width: 1280px){
+    .form-content {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        height: 75vh;
+
+
+        .title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            width: 100%;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 70%;
+        width: 45%;
+    }
+
+    .form-group {
+        width: 50%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .input-label {
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 1.3rem;
+    }
+
+    .form-control:not(#studio) {
+        border: none;
+        border-bottom: 1px solid black;
+        transition: all ease-in-out .4s;
+        width: 50%;
+        margin-top: 2%;
+        font-family: 'Yanone Kaffeesatz', sans-serif;
+        font-size: 1.3rem;
+        text-align: center;
+    }
+
+    #studio {
+        border: none;
+        font-family: 'Yanone Kaffeesatz', sans-serif;
+        width: 50%;
+        margin-top: 2%;
+        font-size: 1.3rem;
+        text-align: center;
+    }
+
+    .checkbox-label {
+        font-family: 'Yanone Kaffeesatz', sans-serif;
+        font-size: 1.3rem;
+    }
+
+    .checkbox-input {
+        height: 15px;
+        width: 15px;
+    }
+
+    .form-control:focus {
+        width: 75%;
+    }
+
+
+
+    #cover {
+        display: none;
+
+    }
+
+    #cover-label {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        opacity: .7;
+        font-size: 1rem;
+    }
+
+    #cover-label:hover {
+        opacity: 1;
+    }
+}

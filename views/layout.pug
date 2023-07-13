@@ -8,34 +8,57 @@ html
     link(rel='stylesheet' href='/stylesheets/form.css')
     link(rel='stylesheet' href='/stylesheets/list.css')
     link(rel='stylesheet' href='/stylesheets/detail.css')
+    link(rel='stylesheet' href='/stylesheets/delete.css')
+    script(src='/scripts/script.js' defer)
 
   body
-    div.header 
-      div.logo-container
-        a.logo-link(href='/')
-          img.logo(src='/img/spider-logo.png') 
-          p Spider Game Store
-      div.navbar
-        div.element-container
-          a(href='/catalog/games' class='navbar-link') Games
-          div.subelement-container
-            a.hover-link(href='/catalog/game/create') Register a new Game
-        div.element-container
-          a(href='/catalog/consoles' class='navbar-link') Consoles
-          div.subelement-container
-            a.hover-link(href='/catalog/console/create') Register a new Console
-        div.element-container
-          a(href='/catalog/game_instances' class='navbar-link') Instances
-          div.subelement-container
-            a.hover-link(href='/catalog/game_instance/create') Register a new Instance
-        div.element-container
-          a(href='/catalog/genres' class='navbar-link') Genres
-          div.subelement-container
-            a.hover-link(href='/catalog/genre/create') Register a new Genre
-        div.element-container
-          a(href='/catalog/studios' class='navbar-link') Studios
-          div.subelement-container  
-            a.hover-link(href='/catalog/studio/create') Register a new Studio
+    div.menu-cover
+    div.header-container
+      div.header 
+        div.logo-container
+          a.logo-link(href='/')
+            img.logo(src='/img/spider-logo.png') 
+            p SPIDER GAME STORE
+        div.navbar
+          div.element-container
+            a(href='/catalog/games' class='navbar-link') Games
+            div.subelement-container
+              a.hover-link(href='/catalog/game/create') Register a new Game
+          div.element-container
+            a(href='/catalog/consoles' class='navbar-link') Consoles
+            div.subelement-container
+              a.hover-link(href='/catalog/console/create') Register a new Console
+          div.element-container
+            a(href='/catalog/game_instances' class='navbar-link') Instances
+            div.subelement-container
+              a.hover-link(href='/catalog/game_instance/create') Register a new Instance
+          div.element-container
+            a(href='/catalog/genres' class='navbar-link') Genres
+            div.subelement-container
+              a.hover-link(href='/catalog/genre/create') Register a new Genre
+          div.element-container
+            a(href='/catalog/studios' class='navbar-link') Studios
+            div.subelement-container  
+              a.hover-link(href='/catalog/studio/create') Register a new Studio
+        
+        div.navigation-mobile
+          img.navigation-img(src='/img/menu.png')
+          div.submenu#games-link
+            a.submenu-text(href='/catalog/games') GAMES
+              img.submenu-img(src='/img/games.png') 
+          div.submenu#consoles-link
+            a.submenu-text(href='/catalog/consoles') CONSOLES
+              img.submenu-img(src='/img/consoles.png')
+          div.submenu#instances-link
+            a.submenu-text(href='/catalog/game_instances') INSTANCES
+              img.submenu-img(src='/img/instances.png')
+          div.submenu#genres-link
+            a.submenu-text(href='/catalog/genres') GENRES
+              img.submenu-img(src='/img/genres.png')
+          div.submenu#studios-link
+            a.submenu-text(href='/catalog/studios') STUDIOS
+              img.submenu-img(src='/img/studios.png')
+            
     block content
 
     div.footer

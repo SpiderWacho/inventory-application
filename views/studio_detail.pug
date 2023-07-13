@@ -2,13 +2,13 @@ extends layout
 
 block content
   div.detail-content
-    h1.title Studio: #{studio.name}
-    p Created in: #{studio.creation_year}
-    p Founders: #{studio.founders} 
-    p Nationality: #{studio.nationality}
+    h1.title #[strong Studio:] #{studio.name}
+    p.info #[strong Created in:] #{studio.creation_year}
+    p.info #[strong Founders:] #{studio.founders} 
+    p.info #[strong Nationality:] #{studio.nationality}
     div
 
-      h4 Games
+      h2.title Games by #{studio.name}
 
       if studio_games.length
         div.list-container
@@ -22,7 +22,7 @@ block content
 
     hr
     div.btn-container
-      btn.btn-primary
-          a(href=studio.url+'/delete') Delete Studio
-      btn.btn-primary
-          a(href=studio.url+'/update') Update Studio
+      a.btn-link(href=studio.url+'/delete')  
+        btn.btn-primary Delete Studio
+      a.btn-link(href=studio.url+'/update') 
+        btn.btn-primary Update Studio

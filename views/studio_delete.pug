@@ -1,21 +1,22 @@
 extends layout 
 
 block content
-    h1  #{title}: #{studio.name}
-    p Founders:
-    each founder in studio.founders 
-        p #{founder}
-    if game_list.length 
-        p #[strong Delete the following associated games to delete this studio.]
-        each game in game_list 
-            dl
-            dt
-                p Game: 
-                    a(href=game.url) #{game.title}
-    else 
-        p Do you really want to delete this Studio?
-    
-        form(method='POST' action='')
-            div.form-group
-                input#studioid.form-control(type='hidden', name='studioid', required='true', value=studio._id)
-            button.btn.btn-primary(type='submit') Delete
+    div.delete-content
+        h1.title  #{title}: #{studio.name}
+        H3.info Founders:
+        each founder in studio.founders 
+            p.info #{founder}
+        if game_list.length 
+            p.info #[strong #[u Delete the following associated games to delete this studio:]]
+            div.list-container
+                ul
+                    each game in game_list
+                        li.info 
+                            a(href=game.url) #{game.title}
+        else 
+            p.info Do you really want to delete this Studio?
+        
+            form(method='POST' action='')
+                div.form-group
+                    input#studioid.form-control(type='hidden', name='studioid', required='true', value=studio._id)
+                button.btn.btn-primary(type='submit') Delete
