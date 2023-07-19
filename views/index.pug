@@ -1,32 +1,33 @@
 extends layout
 
 block content
-  div.content
-    h1.title Last added games
-    div.carrousel-container
-      for game, index in games.reverse()
-        if index < 3 
-          div.gameCard      
-            a.link(href=game.url)  
-              div.gameCard-image-container 
-                if game.img.data !== undefined
-                  img.gameCard-image(src=`data:image/${game.img.contentType};base64,${game.img.data.toString('base64')}`)
-                else 
-                  p.text-image #{game.title}
-              div.gameCard-text
-                p #{game.title}
-  
-    span.title-container
-      h2.title Current Data in Store
-    ul
-      li Current Games created: 
-        a.link(href='/catalog/games/') #{gameNumber} 
-      li Current Game Instances: 
-        a.link(href='/catalog/gameinstances/') #{gameInstanceNumber}
-      li Current Genres created: 
-        a.link(href='/catalog/genres/') #{genreNumber}
-      li Current Studios created: 
-        a.link(href='/catalog/studios/') #{studioNumber}
-      li Current Consoles created: 
-        a.link(href='/catalog/consoles/') #{consoleNumber}
+  div.container
+    div.content
+      h1.title Last added games
+      div.carrousel-container
+        for game, index in games.reverse()
+          if index < 5
+            div.gameCard.js-scroll.fade-in-bottom      
+              a.link(href=game.url)  
+                div.gameCard-image-container 
+                  if game.img.data !== undefined
+                    img.gameCard-image(src=`data:image/${game.img.contentType};base64,${game.img.data.toString('base64')}`)
+                  else 
+                    p.text-image #{game.title}
+                div.gameCard-text
+                  p #{game.title}
+    
+      span.title-container
+        h2.title Current Data in Store
+      ul
+        li Current Games created: 
+          a.link(href='/catalog/games/') #{gameNumber} 
+        li Current Game Instances: 
+          a.link(href='/catalog/gameinstances/') #{gameInstanceNumber}
+        li Current Genres created: 
+          a.link(href='/catalog/genres/') #{genreNumber}
+        li Current Studios created: 
+          a.link(href='/catalog/studios/') #{studioNumber}
+        li Current Consoles created: 
+          a.link(href='/catalog/consoles/') #{consoleNumber}
     

@@ -1,18 +1,19 @@
 extends layout
 
 block content
-  div.list-content
-    h1.title= title
+  div.container
+    div.list-content
+      h1.title= title
 
-    div.list-container 
-      ul
-        each console in console_list
-          li
-            a(href=console.url) #{console.name}
+      div.list-container 
+        ul
+          each console in console_list
+            li
+              a(href=console.url) #{console.name}
 
-        else
-          li There are no consoles created.
+          else
+            li There are no consoles created.
 
 
-    btn.btn-primary
-      a(href='/catalog/console/create') Add a Console
+      btn.btn-primary
+        a(href='/catalog/console/create') Add a Console

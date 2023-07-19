@@ -7,11 +7,13 @@
     flex-direction: row;
     height: 85vh;
     overflow: scroll;
+    max-width: var(--max-width);
 
     .title {
         width: 100%;
         text-align: center;
         font-family: 'Bebas Neue', sans-serif;
+        font-size: 3rem;
     }
     
     .games-container {
@@ -22,11 +24,11 @@
             display: grid;
             width: 100%;
             height: 100%;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             grid-auto-rows: 1fr;
             justify-items: center;
             align-items: center;
-            gap: 50px;
+            gap: 25px;
             margin-bottom: 50px;
 
             #new-game {
@@ -34,13 +36,13 @@
             }
 
             .game-card {
-                min-height: 250px;
-                height: 70%;
-                width: 75%;
+                height: 450px;
+                width: 315px;
                 border: 1px solid black;
                 animation: appear .7s ease-in-out forwards;
                 transition: all .4s ease-in-out;
                 font-family: 'Rubik', sans-serif;
+                font-size: 1.5rem;
         
                 .link {
                     height: 100%;
@@ -110,7 +112,8 @@
         align-items: center;
         flex-wrap: wrap;
         flex-direction: row;
-        height: 75vh;
+        /*100vh - footer - header*/
+        min-height: calc(100vh - 100px - 100px);
         overflow: scroll;
 
         .title {

@@ -1,18 +1,19 @@
 extends layout
 
 block content
-  div.list-content
-    h1.title= title
+  div.container
+    div.list-content
+      h1.title= title
 
-    div.list-container
-      ul
-        each studio in studio_list
-          li
-            a(href=studio.url)
-              p #{studio.name} (#{studio.creation_year}) | Created by: (#{studio.founders }) | Nationality: (#{studio.nationality})
+      div.list-container
+        ul
+          each studio in studio_list
+            li
+              a(href=studio.url)
+                p #{studio.name} (#{studio.creation_year}) | Created by: (#{studio.founders }) | Nationality: (#{studio.nationality})
 
-        else
-          li There are no studios.
+          else
+            li There are no studios.
 
-    btn.btn-primary
-      a(href='/catalog/studio/create') Add a studio
+      btn.btn-primary
+        a(href='/catalog/studio/create') Add a studio

@@ -9,7 +9,9 @@ html
     link(rel='stylesheet' href='/stylesheets/list.css')
     link(rel='stylesheet' href='/stylesheets/detail.css')
     link(rel='stylesheet' href='/stylesheets/delete.css')
+    link(rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css")
     script(src='/scripts/script.js' defer)
+    script(src="https://unpkg.com/aos@2.3.1/dist/aos.js")
 
   body
     div.menu-cover
@@ -23,23 +25,23 @@ html
           div.element-container
             a(href='/catalog/games' class='navbar-link') Games
             div.subelement-container
-              a.hover-link(href='/catalog/game/create') Register a new Game
+              a.hover-link(href='/catalog/game/create') Add new game
           div.element-container
             a(href='/catalog/consoles' class='navbar-link') Consoles
             div.subelement-container
-              a.hover-link(href='/catalog/console/create') Register a new Console
+              a.hover-link(href='/catalog/console/create') Add new Console
           div.element-container
             a(href='/catalog/game_instances' class='navbar-link') Instances
             div.subelement-container
-              a.hover-link(href='/catalog/game_instance/create') Register a new Instance
+              a.hover-link(href='/catalog/game_instance/create') Add new Instance
           div.element-container
             a(href='/catalog/genres' class='navbar-link') Genres
             div.subelement-container
-              a.hover-link(href='/catalog/genre/create') Register a new Genre
+              a.hover-link(href='/catalog/genre/create') Add new Genre
           div.element-container
             a(href='/catalog/studios' class='navbar-link') Studios
             div.subelement-container  
-              a.hover-link(href='/catalog/studio/create') Register a new Studio
+              a.hover-link(href='/catalog/studio/create') Add new Studio
         
         div.navigation-mobile
           img.navigation-img(src='/img/menu.png')

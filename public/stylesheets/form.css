@@ -7,7 +7,9 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 85vh;
+    min-height: calc(100vh - 100px - 100px - 25px);
+    max-width: var(--max-width);
+    width: 100%;
 
 
     .title {
@@ -15,7 +17,8 @@
         font-family: 'Bebas Neue', sans-serif;
         width: 100%;
         text-align: center;
-        font-size: 5rem;text-decoration: underline;
+        font-size: 5rem;
+        text-decoration: underline;
     }
 }
 
@@ -25,7 +28,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 80%;
+    gap: 40px;
 }
 
 .form-group {
@@ -35,6 +38,28 @@
     justify-content: center;
     align-items: center;
 }
+
+.genre {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    max-height: 365px;
+    height: 100%;
+    width: 35%;
+    border-right: .5px solid rgb(36, 36, 36);
+}
+
+.consoles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 365px;
+    width: 35%;
+}
+
+
 
 .input-label {
     display: block;
@@ -54,6 +79,8 @@
     font-size: 3rem;
     text-align: center;
 }
+
+
 
 #studio {
     border: none;
@@ -89,7 +116,6 @@ option {
 }
 
 #cover-label {
-    margin-top: 2%;
     border: 1px solid #ccc;
     display: inline-block;
     padding: 6px 12px;
@@ -104,68 +130,37 @@ option {
 
 @media only screen and (min-width: 1280px){
     .form-content {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        height: 75vh;
+        /*100vh - footer - header*/
 
 
         .title {
-            font-family: 'Bebas Neue', sans-serif;
             font-size: 3rem;
-            width: 100%;
         }
     }
 
     form {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 70%;
         width: 45%;
     }
 
     .form-group {
         width: 50%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
     }
 
     .input-label {
-        display: block;
-        width: 100%;
-        text-align: center;
-        font-family: 'Bebas Neue', sans-serif;
         font-size: 1.3rem;
     }
 
     .form-control:not(#studio) {
-        border: none;
-        border-bottom: 1px solid black;
-        transition: all ease-in-out .4s;
         width: 50%;
-        margin-top: 2%;
-        font-family: 'Yanone Kaffeesatz', sans-serif;
         font-size: 1.3rem;
-        text-align: center;
     }
 
     #studio {
-        border: none;
-        font-family: 'Yanone Kaffeesatz', sans-serif;
         width: 50%;
-        margin-top: 2%;
         font-size: 1.3rem;
-        text-align: center;
     }
 
     .checkbox-label {
-        font-family: 'Yanone Kaffeesatz', sans-serif;
         font-size: 1.3rem;
     }
 
@@ -174,27 +169,12 @@ option {
         width: 15px;
     }
 
-    .form-control:focus {
-        width: 75%;
-    }
-
-
-
-    #cover {
-        display: none;
-
-    }
-
     #cover-label {
-        border: 1px solid #ccc;
-        display: inline-block;
-        padding: 6px 12px;
-        cursor: pointer;
-        opacity: .7;
         font-size: 1rem;
     }
 
-    #cover-label:hover {
-        opacity: 1;
+    .consoles {
+        min-height: 145px;
     }
+
 }

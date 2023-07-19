@@ -1,23 +1,24 @@
 extends layout
 
 block content
-    div.game-list-content
-        h1.title List of all games
-        div.games-container
-            div.game-grid
-                div#new-game.game-card
-                    a.link(href='/catalog/game/create')
-                        div.image-container
-                            p.text-image Add a New Game 
-                        div.text-container
-                            p New Game
-                each game, i in game_list    
-                    div.game-card      
-                        a.link(href=game.url)  
-                            div.image-container 
-                                if game.img.data !== undefined
-                                    img.image(src=`data:image/${game.img.contentType};base64,${game.img.data.toString('base64')}`)
-                                else 
-                                    p.text-image #{game.title}
+    div.container
+        div.game-list-content
+            h1.title List of all games
+            div.games-container
+                div.game-grid
+                    div#new-game.game-card
+                        a.link(href='/catalog/game/create')
+                            div.image-container
+                                p.text-image Add a New Game 
                             div.text-container
-                                p #{game.title}      
+                                p New Game
+                    each game, i in game_list    
+                        div.game-card      
+                            a.link(href=game.url)  
+                                div.image-container 
+                                    if game.img.data !== undefined
+                                        img.image(src=`data:image/${game.img.contentType};base64,${game.img.data.toString('base64')}`)
+                                    else 
+                                        p.text-image #{game.title}
+                                div.text-container
+                                    p #{game.title}      

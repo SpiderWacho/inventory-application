@@ -1,26 +1,27 @@
 extends layout
 
 block content
-    div.detail-content
-        h1.title Console: #{console.name}
-        p.info Manufacturer: #{console.manufacturer}
-        p.info Release year: #{console.release_year}
-        h2.title #[strong Games for this console:] 
+    div.container
+        div.detail-content
+            h1.title Console: #{console.name}
+            p.info Manufacturer: #{console.manufacturer}
+            p.info Release year: #{console.release_year}
+            h2.title #[strong Games for this console:] 
+            
+            div.list-container
+                ul
+                    if (game_list.length) 
+                        each game in game_list 
+                            li
+                                a(href=game.url) #{game.title}
+                    else 
+                            li
+                                p There is no games in this genre.
+            
+            hr
+            div.btn-container
+                a.btn-link(href=console.url+'/delete') 
+                    btn.btn-primary Delete Console
+                a.btn-link(href=console.url+'/update')            
+                    btn.btn-primary Update Console
         
-        div.list-container
-            ul
-                if (game_list.length) 
-                    each game in game_list 
-                        li
-                            a(href=game.url) #{game.title}
-                else 
-                        li
-                            p There is no games in this genre.
-        
-        hr
-        div.btn-container
-            a.btn-link(href=console.url+'/delete') 
-                btn.btn-primary Delete Console
-            a.btn-link(href=console.url+'/update')            
-                btn.btn-primary Update Console
-    

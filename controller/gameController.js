@@ -12,6 +12,7 @@ const multer  = require('multer')
 var path = require('path');
 
 const fs = require('fs');
+const aos = require('aos')
 
 
 const multerStorage = multer.memoryStorage();
@@ -39,6 +40,7 @@ exports.index = asyncHandler(async (req, res, next) => {
             genreNumber: genreNumber,
             studioNumber: studioNumber,
             consoleNumber: consoleNumber,
+            aos: aos,
             error: newError})
   });
 

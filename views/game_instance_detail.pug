@@ -1,37 +1,38 @@
 extends layout
 
 block content
-    div.detail-content
-        h1.title ID: #{game_instance._id}
-        p.info #[strong Game:] 
-            a.link(href=game_instance.game.url) #{game_instance.game.title}
+    div.container
+        div.detail-content
+            h1.title ID: #{game_instance._id}
+            p.info #[strong Game:] 
+                a.link(href=game_instance.game.url) #{game_instance.game.title}
+            
+            p.info #[strong Status:]
+            if game_instance.status=='Available'
+                span.info.text-success #{game_instance.status}
+            else if game_instance.status=='Maintenance'
+                span.info.text-danger #{game_instance.status}
+            else
+                spaninfo.info.text-warning #{game_instance.status}
+
+            if game_instance.status!='Available'
+                p.info #[strong Due back:] #{game_instance.due_back_formatted}
+
+
+            // Stringify both instance and game_instance because they are objects
+            h2.title Other instances of this game:
+            if other_instances.lenght
+                each instance in other_instances    
+                    if JSON.stringify(instance._id) !== JSON.stringify(game_instance._id) 
+                        p.info ID: 
+                            a(href=instance.url) #{instance._id}
+            else 
+                p.info.link This game has not instances created
+
+            hr
+            div.btn-container
+                a.btn-link(href=game_instance.url+'/delete') 
+                    btn.btn-primary Delete Game Instance
+                a.btn-link(href=game_instance.url+'/update') 
+                    btn.btn-primary Update Game Instance
         
-        p.info #[strong Status:]
-        if game_instance.status=='Available'
-            span.info.text-success #{game_instance.status}
-        else if game_instance.status=='Maintenance'
-            span.info.text-danger #{game_instance.status}
-        else
-            spaninfo.info.text-warning #{game_instance.status}
-
-        if game_instance.status!='Available'
-            p.info #[strong Due back:] #{game_instance.due_back_formatted}
-
-
-        // Stringify both instance and game_instance because they are objects
-        h2.title Other instances of this game:
-        if other_instances.lenght
-            each instance in other_instances    
-                if JSON.stringify(instance._id) !== JSON.stringify(game_instance._id) 
-                    p.info ID: 
-                        a(href=instance.url) #{instance._id}
-        else 
-            p.info.link This game has not instances created
-
-        hr
-        div.btn-container
-            a.btn-link(href=game_instance.url+'/delete') 
-                btn.btn-primary Delete Game Instance
-            a.btn-link(href=game_instance.url+'/update') 
-                btn.btn-primary Update Game Instance
-    

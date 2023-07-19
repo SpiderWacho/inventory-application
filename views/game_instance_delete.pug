@@ -1,14 +1,15 @@
 extends layout 
 
 block content
-    div.delete-content
-        h1.title Game: #{game_instance.game.title}
-        h2.title ID: #{game_instance._id} 
-        p.info Status: #{game_instance.status}
-        p.info Due Back: #{game_instance.due_back}
-        p.info Do you really want to delete this Game Instance?
-    
-        form(method='POST' action='')
-            div.form-group
-                input#game_instanceid.form-control(type='hidden', name='game_instanceid', required='true', value=game_instance._id)
-            button.btn.btn-primary(type='submit') Delete
+    div.container
+        div.delete-content
+            h1.title Game: #{game_instance.game.title}
+            h2.title ID: #{game_instance._id} 
+            p.info Status: #{game_instance.status}
+            p.info Due Back: #{game_instance.due_back}
+            p.info Do you really want to delete this Game Instance?
+        
+            form(method='POST' action='')
+                div.form-group
+                    input#game_instanceid.form-control(type='hidden', name='game_instanceid', required='true', value=game_instance._id)
+                button.btn.btn-primary(type='submit') Delete

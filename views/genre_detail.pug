@@ -1,22 +1,23 @@
 extends layout
 
 block content
-    div.detail-content
-        h1.title Genre: #{genre.name}
-        h2.subtitle #[strong Games in this genre] 
-        div.list-container
-            ul
-                if (gamesByGenre.length) 
-                    each game in gamesByGenre 
-                        li
-                            a(href=game.url) #{game.title}
-                else 
-                    li There is no games in this genre.
-        
+    div.container
+        div.detail-content
+            h1.title Genre: #{genre.name}
+            h2.subtitle #[strong Games in this genre] 
+            div.list-container
+                ul
+                    if (gamesByGenre.length) 
+                        each game in gamesByGenre 
+                            li
+                                a(href=game.url) #{game.title}
+                    else 
+                        li There is no games in this genre.
+            
 
-        hr
-        div.btn-container
-            a.btn-link(href=genre.url+'/delete') 
-                btn.btn-primary Delete Genre
-            a.btn-link(href=genre.url+'/update') 
-                btn.btn-primary Update Genre
+            hr
+            div.btn-container
+                a.btn-link(href=genre.url+'/delete') 
+                    btn.btn-primary Delete Genre
+                a.btn-link(href=genre.url+'/update') 
+                    btn.btn-primary Update Genre
