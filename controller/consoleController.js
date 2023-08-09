@@ -35,15 +35,15 @@ exports.console_create_get = (req, res, next) => {
 exports.console_create_post = [
   body("name", "Name must not be empty")
   .trim()
-  .isLength({min: 3})
+  .isLength({min: 1})
   .escape(),
   body("manufacturer", "Manufacturer must not be empty")
-  .optional ({ checkFalsy: true})
+  .optional({ checkFalsy: true})
   .trim()
   .isLength({min: 3})
   .escape(),
   body("release_year")
-  .optional ({ checkFalsy: true})
+  .optional({ checkFalsy: true})
   .isInt({min: 1930, max: 2030}),
   
   asyncHandler(async (req, res, next) => {
@@ -120,15 +120,15 @@ exports.console_update_get = asyncHandler(async (req, res, next) => {
 exports.console_update_post = [
   body("name", "Name must not be empty")
 .trim()
-.isLength({min: 3})
+.isLength({min: 1})
 .escape(),
 body("manufacturer", "Manufacturer must not be empty")
-.optional ({ checkFalsy: true})
+.optional({ checkFalsy: true})
 .trim()
 .isLength({min: 3})
 .escape(),
 body("release_year")
-.optional ({ checkFalsy: true})
+.optional({ checkFalsy: true})
 .isInt({min: 1930, max: 2030}),
 
 asyncHandler(async (req, res, next) => {

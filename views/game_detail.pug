@@ -31,7 +31,7 @@ block content
                     img.gameCard-image(src=`data:image/${game.img.contentType};base64,${game.img.data.toString('base64')}`)
                 else
                     div.gameCard-image 
-                        p.subtext This game don't have a saved img
+                        p.subtext No image uploaded
             hr
             div.btn-container
                 a.btn-link(href=game.url+'/delete') 

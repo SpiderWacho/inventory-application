@@ -6,6 +6,8 @@ block content
       h1.title Last added games
       div.carrousel-container
         for game, index in games.reverse()
+          if games.lenght == 0
+            p.subtitle No games registered
           if index < 5
             div.gameCard.js-scroll.fade-in-bottom      
               a.link(href=game.url)  

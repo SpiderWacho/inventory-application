@@ -4,8 +4,8 @@ block content
     div.container
         div.detail-content
             h1.title Console: #{console.name}
-            p.info Manufacturer: #{console.manufacturer}
-            p.info Release year: #{console.release_year}
+            p.info Manufacturer: #{console.manufacturer ? console.manufacturer : 'No manufacturer'}
+            p.info Release year: #{console.releaser_year ? console.release_year : 'No release year'}
             h2.title #[strong Games for this console:] 
             
             div.list-container
@@ -16,7 +16,7 @@ block content
                                 a(href=game.url) #{game.title}
                     else 
                             li
-                                p There is no games in this genre.
+                                p No games registered on this console.
             
             hr
             div.btn-container

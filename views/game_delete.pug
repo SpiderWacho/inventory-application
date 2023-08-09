@@ -5,16 +5,16 @@ block content
         div.delete-content
             h1.title  #{title}: #{game.title}
             if game_instances.length 
-                p #[strong Delete the following game instances to delete this game.]
+                p.info-text #[strong Delete the following game instances to delete this game.]
                 div.list-container
                     ul
                         each instance in game_instances 
                                 li.info  
-                                    a(href=instance.url) ID: #{instance._id}
+                                    a.info-link(href=instance.url) ID: #{instance._id}
             else 
                 p.info Do you really want to delete this Game?
             
-                form(method='POST' action='')
+                form.delete-form(method='POST' action='')
                     div.form-group
                         input#gameid.form-control(type='hidden', name='gameid', required='true', value=game._id)
-                    button.btn.btn-primary(type='submit') Delete
+                        button.btn.btn-primary(type='submit') Delete

@@ -5,6 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const RateLimit = require("express-rate-limit");
 const helmet = require("helmet");
+const cors = require('cors');
+
+require('dotenv').config();
 // Import the mongoose module
 const mongoose = require("mongoose");
 
@@ -36,7 +39,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+app.enable('trust proxy');
 
 
 
@@ -57,9 +60,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 mongoose.set("strictQuery", false);
 // Define the database URL to connect to.
-const dev_db_url =
-  "mongodb+srv://spider:kVunRROTmXqW4vQL@cluster0.hktvh3o.mongodb.net/game_store?retryWrites=true&w=majority";
-const mongoDB = process.env.MONGO_URL || dev_db_url;
+
+const mongoDB = process.env.MONGODB_URI 
 
 main().catch((err) => console.log(err));
 async function main() {
@@ -69,6 +71,11 @@ async function main() {
 // Apply rate limiter to all requests
 app.use(limiter);
 
+app.use(
+  cors({
+    origin: ["http://localhost:3000", process.env.ORIGIN],
+  })
+);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

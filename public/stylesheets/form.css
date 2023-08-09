@@ -69,6 +69,10 @@
     font-size: 4rem;
 }
 
+textarea:focus, input:focus{
+    outline: none;
+}
+
 .form-control:not(#studio) {
     border: none;
     border-bottom: 1px solid black;

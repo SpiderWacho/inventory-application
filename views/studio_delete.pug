@@ -13,11 +13,11 @@ block content
                     ul
                         each game in game_list
                             li.info 
-                                a(href=game.url) #{game.title}
+                                a.info-link(href=game.url) #{game.title}
             else 
                 p.info Do you really want to delete this Studio?
             
-                form(method='POST' action='')
+                form.delete-form(method='POST' action='')
                     div.form-group
                         input#studioid.form-control(type='hidden', name='studioid', required='true', value=studio._id)
-                    button.btn.btn-primary(type='submit') Delete
+                        button.btn.btn-primary(type='submit') Delete

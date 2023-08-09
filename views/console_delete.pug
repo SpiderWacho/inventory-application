@@ -5,16 +5,15 @@ block content
         div.delete-content
             h1.title  #{title}: #{console.name}
             if game_list.length 
-                p #[strong Delete the following associated games to delete this console.]
+                p.info-text #[strong Delete the following associated games to delete this console.]
                 each game in game_list 
-                    dl
-                    dt
-                        p Game: 
-                            a(href=game.url) #{game.title}
+                        ul
+                            li
+                                a.info-link(href=game.url) #{game.title}
             else 
                 p.info Do you really want to delete this Console?
             
-                form(method='POST' action='')
+                form.delete-form(method='POST' action='')
                     div.form-group
                         input#consoleid.form-control(type='hidden', name='consoleid', required='true', value=console._id)
-                    button.btn.btn-primary(type='submit') Delete
+                        button.btn.btn-primary(type='submit') Delete
