@@ -1,5 +1,5 @@
 # Inventory Application
-The objective of this project were to put in practice all the things that i learned about Node.js and Express applications.
+The objective of this project was to put in practice all the things that i learned about Node.js and Express applications.
 I also used MongoDB and the MVC model.
 <br>
 [Live preview](https://game-store.fly.dev/catalog)
