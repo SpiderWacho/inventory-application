@@ -13,6 +13,7 @@ Desktop View
 </p>
 
 <br>
+
 ## Main take-aways and learnings
 This was my firts deep dive into the express framework. I learned a lot about the back end, in the Server part i used MongoDB,a non-relational document database. I also used the MVC (model, view, controller) model to build this app.
 My impression was that when you have the skeleton of the app/page that you are trying to do, a lot is repetitive, for example the controller to edit, update and delete all the objects of the database are more or less equal, with minnor changes.
